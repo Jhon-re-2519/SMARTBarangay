@@ -25,7 +25,7 @@ export const useApiQuery = <T>(endpoint: string, dependencies: any[] = []) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<IApiError | null>(null);
 
-  const fetchData = uzseCallback(async () => {
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
