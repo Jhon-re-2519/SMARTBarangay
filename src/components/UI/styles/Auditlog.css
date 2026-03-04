@@ -1,0 +1,456 @@
+/* =========================================
+   AUDIT LOG / BLOCKCHAIN UI (Scoped: AUDIT_)
+   ========================================= */
+
+.AUDIT_PAGE_WRAP {
+  height: 100%;
+  width: 100%;
+  background-color: #f1f5f9; /* Slightly darker professional gray bg */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.AUDIT_MAIN_CONTAINER {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 3rem; /* More breathing room on sides */
+  overflow: hidden;
+  max-width: 1400px; /* Allow it to go wider on large screens */
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- HEADER --- */
+.AUDIT_HEADER {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.AUDIT_TITLE {
+  font-size: 1.75rem; /* Slightly larger title */
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.AUDIT_SUB {
+  margin: 8px 0 0 0;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* --- TOOLBAR & FILTERS (THE FIX) --- */
+.AUDIT_TOOLBAR {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  padding: 12px 20px;
+  border-radius: 12px; /* Smoother corners */
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* subtler shadow */
+  margin-bottom: 2.5rem;
+}
+
+.AUDIT_SEARCH {
+  position: relative;
+  flex: 1; /* Takes up remaining space */
+  display: flex;
+  align-items: center;
+}
+
+.AUDIT_SEARCH i {
+  position: absolute;
+  left: 16px;
+  font-size: 1rem;
+  color: #94a3b8;
+  pointer-events: none; /* clicks pass through to input */
+}
+
+.AUDIT_SEARCH input {
+  width: 100%;
+  padding: 12px 16px 12px 48px; /* Room for icon */
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background-color: #f8fafc; /* Slight contrast input bg */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.AUDIT_SEARCH input::placeholder {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.AUDIT_SEARCH input:focus {
+  background-color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); /* Professional focus ring */
+}
+
+.AUDIT_DATE_FILTER {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+  border-left: 2px solid #f1f5f9; /* Separator line */
+}
+
+.AUDIT_DATE_FILTER label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.AUDIT_DATE_FILTER input[type="date"] {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e293b;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.AUDIT_DATE_FILTER input[type="date"]:focus {
+    background-color: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.CLEAR_DATE_BTN {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #ef4444;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.CLEAR_DATE_BTN:hover {
+    background: #fee2e2;
+    border-color: #fda4af;
+}
+
+/* --- ACTIONS BUTTONS --- */
+.AUDIT_ACTIONS {
+  display: flex;
+  gap: 12px;
+}
+
+.AUDIT_EXPORT_BTN, .AUDIT_VERIFY_BTN {
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.AUDIT_EXPORT_BTN {
+  border: 1px solid #cbd5e1;
+  background-color: white;
+  color: #1e293b;
+}
+
+.AUDIT_EXPORT_BTN:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.AUDIT_VERIFY_BTN {
+  border: 1px solid #059669;
+  background-color: #10b981; /* Solid green for primary action */
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+}
+
+.AUDIT_VERIFY_BTN:hover {
+  background-color: #047857;
+  border-color: #047857;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px -1px rgba(16, 185, 129, 0.3);
+}
+
+.AUDIT_VERIFY_BTN.VERIFYING {
+  background-color: #6ee7b7;
+  border-color: #6ee7b7;
+  cursor: wait;
+  transform: none;
+}
+
+/* --- CHAIN CONTAINER --- */
+.AUDIT_CHAIN_CONTAINER {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 14px; /* nicer scrollbar gap */
+  padding-bottom: 4rem;
+}
+
+/* --- DATE SEPARATION --- */
+.AUDIT_DATE_GROUP {
+  margin-bottom: 2.5rem;
+}
+
+.DATE_SEPARATOR {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+}
+
+.DATE_LINE {
+  flex: 1;
+  height: 2px; /* slightly thicker line */
+  background-color: #e2e8f0;
+  border-radius: 1px;
+}
+
+.DATE_LABEL {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: #ffffff;
+  padding: 6px 16px;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* --- BLOCK ROW (The Timeline) --- */
+.BLOCK_ROW {
+  display: flex;
+  gap: 24px; /* wider gap between timeline and card */
+  position: relative;
+}
+
+.BLOCK_CONNECTOR {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 28px; /* align with card header */
+  width: 24px;
+}
+
+.BLOCK_DOT {
+  width: 14px;
+  height: 14px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px #dbeafe; /* bolder ring */
+  z-index: 2;
+}
+
+.BLOCK_LINE {
+  flex: 1;
+  width: 3px; /* bolder timeline */
+  background-color: #cbd5e1;
+  margin-top: 0;
+  min-height: 100px;
+}
+
+/* --- BLOCK CARD (The Data) --- */
+.BLOCK_CARD {
+  flex: 1;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px; /* modern rounded corners */
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease-in-out;
+}
+
+.BLOCK_CARD:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #94a3b8;
+}
+
+.BLOCK_HEADER {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px dashed #f1f5f9;
+}
+
+.BLOCK_ID {
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  background: #0f172a; /* Dark background for ID */
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.BLOCK_TIME {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.BLOCK_STATUS_BADGE {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.05em;
+}
+
+.BLOCK_STATUS_BADGE.VERIFIED {
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+/* --- BLOCK BODY --- */
+.BLOCK_BODY {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.BLOCK_ACTION {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.BLOCK_ACTOR {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f0f9ff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #bae6fd;
+  width: fit-content;
+}
+
+.ACTOR_LABEL {
+  font-size: 0.75rem;
+  color: #0369a1;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.ACTOR_NAME {
+  font-size: 0.95rem;
+  color: #0284c7;
+  font-weight: 700;
+}
+
+.BLOCK_DETAILS {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.6;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+/* --- HASH DISPLAY (Tech Look) --- */
+.BLOCK_HASH_DATA {
+  background-color: #0f172a; /* Terminal Black */
+  border-radius: 10px;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  border: 1px solid #334155;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.HASH_ROW {
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.HASH_LABEL {
+  color: #64748b;
+  font-weight: 700;
+  min-width: 60px;
+}
+
+.HASH_VAL {
+  color: #cbd5e1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.HASH_ROW.CURRENT .HASH_VAL {
+  color: #4ade80; /* Hacker Green */
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+}
+
+/* --- EMPTY STATE --- */
+.AUDIT_EMPTY {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #64748b;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: white;
+  border-radius: 16px;
+  border: 2px dashed #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.AUDIT_EMPTY::before {
+    content: '\f002'; /* FontAwesome Search Icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 3rem;
+    color: #cbd5e1;
+}
